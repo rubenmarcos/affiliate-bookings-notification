@@ -70,7 +70,7 @@ text_4 <- text_4 %>% select(created, hotel_name, hotel_city, hotel_country, Comm
 
 # Upload previous data frame available, compare it with the new one and create a new data frame for the differences.
 
-previous <- read.csv("results-A.csv", encoding = "UTF-8", stringsAsFactors = FALSE) %>% mutate(created = as.POSIXct(created), Commission = as.numeric(Commission), checkin = as.Date(checkin), checkout = as.Date(checkout), hotel_name = as.character(hotel_name), hotel_city = as.character(hotel_city), hotel_country = as.character(hotel_country), length_of_stay = as.numeric(length_of_stay), label = as.character(label), user_device = as.character(user_device))
+previous <- read.csv("results-A.csv", encoding = "UTF-8", stringsAsFactors = FALSE) %>% mutate(created = as.POSIXct(created), Commission = as.numeric(Commission), checkin = as.Date(checkin), checkout = as.Date(checkout), hotel_name = as.character(hotel_name), hotel_city = as.character(hotel_city), hotel_country = as.character(hotel_country), length_of_stay = as.numeric(length_of_stay), label = ifelse(is.na(as.character(label)),"",as.character(label)), user_device = as.character(user_device))
 
 new_results <- setdiff(text_4,previous)
 
